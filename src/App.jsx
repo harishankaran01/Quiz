@@ -5,7 +5,9 @@ import Start from './Components/Start'
 export default function App() {
   const [submit,setSubmit]=useState(false);
   const [isTrue, setIsTrue] = useState(false);
+  const[user,setUser]=useState("");
   const [questions, setQuestions] = useState([]);
+  const [showAnswer,setShowAnswer]=useState(false);
   useEffect(() => {
     async function get() {
       try {
@@ -43,10 +45,11 @@ export default function App() {
     }
     get();
   }, [])
-  let Quizz = questions.map(value => {
-    return <Quiz question={value.question} cor_ans={value.correct_answer} submit={submit} answers={value.options} selected={selected} key={value.correct_answer} />
+  let Quizz = questions.map((value,index) => {
+    return <Quiz question={value.question} index={index+1} cor_ans={value.correct_answer} submit={submit} answers={value.options} selected={selected} key={value.correct_answer} showAnswer={showAnswer} />
   })
-  function OnChange() {
+  function OnChange(name) {
+    setUser(name);
     setIsTrue(prev => !prev)
   }
   function selected(answer, question) {
@@ -69,13 +72,23 @@ export default function App() {
   return (
     <div className='app'>
       {isTrue ?
+      <div className="Quizz">
+       
+        <h1>Quiz</h1>
+        <div className="user">
+         <p>UserName:{user}</p>
+         </div>
         <div className='questions'>
           {questions.length > 0 ?
             <div>
               {Quizz}
-              <button onClick={()=>setSubmit(prev=>!prev)}> {submit?"New quiz" :"Submit"}</button>
+              <div className="btns">
+              <button onClick={()=>setSubmit(prev=>!prev)} className='subbutton'> {submit?"New quiz" :"Submit"}</button>
+              {submit?<button onClick={()=>setShowAnswer(prev=>!prev)} className='checkbutton'>Show Answer</button>:""}
+              </div>
+              
             </div>
-            : <h1>Page load error</h1>}</div> : <Start OnChange={OnChange} />}
+            : <h1>Page load error</h1>}</div></div> : <Start OnChange={OnChange} />}
 
     </div>
   )
