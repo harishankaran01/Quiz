@@ -4,6 +4,7 @@ import Start from './Components/Start'
 
 export default function App() {
   const [submit,setSubmit]=useState(false);
+  const [refresh,setRefresh]=useState(0);
   const [isTrue, setIsTrue] = useState(false);
   const[user,setUser]=useState("");
   const [questions, setQuestions] = useState([]);
@@ -44,7 +45,7 @@ export default function App() {
       }
     }
     get();
-  }, [])
+  }, [refresh])
   let Quizz = questions.map((value,index) => {
     return <Quiz question={value.question} index={index+1} cor_ans={value.correct_answer} submit={submit} answers={value.options} selected={selected} key={value.correct_answer} showAnswer={showAnswer} />
   })
@@ -83,7 +84,12 @@ export default function App() {
             <div>
               {Quizz}
               <div className="btns">
-              <button onClick={()=>setSubmit(prev=>!prev)} className='subbutton'> {submit?"New quiz" :"Submit"}</button>
+              <button onClick={()=>setSubmit(prev=>
+                { if(prev){
+                  console.log(prev)
+                  setRefresh(1);
+                }
+                return !prev})} className='subbutton'> {submit?"New quiz" :"Submit"}</button>
               {submit?<button onClick={()=>setShowAnswer(prev=>!prev)} className='checkbutton'>Show Answer</button>:""}
               </div>
               
