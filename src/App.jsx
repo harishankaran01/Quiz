@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Quiz from './Components/Quiz'
-import Start from './Components/Start'
+import Start from './Components/Start';
+import error from "./404-error.png"
+import { FaBattleNet } from "react-icons/fa";
 
 export default function App() {
   const [submit,setSubmit]=useState(false);
@@ -10,6 +12,7 @@ export default function App() {
   const [questions, setQuestions] = useState([]);
   const [showAnswer,setShowAnswer]=useState(false);
   useEffect(() => {
+    window.scroll(0,0);
     async function get() {
       try {
         let data = await fetch("https://opentdb.com/api.php?amount=10&category=9&difficulty=medium&type=multiple");
@@ -40,8 +43,7 @@ export default function App() {
         })
         setQuestions(data1);
       }
-      catch {
-
+      catch(err){
       }
     }
     get();
@@ -75,10 +77,7 @@ export default function App() {
       {isTrue ?
       <div className="Quizz">
        
-        <h1>Quiz</h1>
-        <div className="user">
-         <p>UserName:{user}</p>
-         </div>
+        <h1 style={{color:"#308cef",marginBlock:"1rem", textAlign:"center"}}>Challenge Your Brain<FaBattleNet /></h1>
         <div className='questions'>
           {questions.length > 0 ?
             <div>
@@ -87,14 +86,18 @@ export default function App() {
               <button onClick={()=>setSubmit(prev=>
                 { if(prev){
                   console.log(prev)
-                  setRefresh(1);
+                  setRefresh(prev=>prev+1);
                 }
                 return !prev})} className='subbutton'> {submit?"New quiz" :"Submit"}</button>
               {submit?<button onClick={()=>setShowAnswer(prev=>!prev)} className='checkbutton'>Show Answer</button>:""}
               </div>
               
             </div>
-            : <h1>Page load error</h1>}</div></div> : <Start OnChange={OnChange} />}
+            : <div className='error'>
+              <img src={error}/>
+               <h1>Loading page error</h1>
+               <h1>Sorry, For the inconvience. Try after few seconds</h1>
+            </div>}</div></div> : <Start OnChange={OnChange} />}
 
     </div>
   )

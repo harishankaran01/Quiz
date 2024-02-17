@@ -10,14 +10,13 @@ export default function Start(props) {
     inputref.current.focus();
   },[])
   return (
-<form class="form">
+<div className="form">
 <div className="title"> <h1>Quiz</h1> <LiaBrainSolid size={40}/></div>
-  {/* <span class="title">Subscribe to our newsletter.</span> */}
-  <p class="description">Challenge your brain's boundaries with a quiz marathon, where every answer unveils a new dimension of understanding.</p>
+  <p className="description">Challenge your brain's boundaries with a quiz marathon, where every answer unveils a new dimension of understanding.</p>
   <div>
     <input ref={inputref} placeholder="Enter your Name" type="text" onChange={(e)=>setName(e.target.value)}  id="email-address" required/>
     <button  onClick={()=>name.trim()? props.OnChange(name):"null"} type="submit">Get Stared</button>
   </div>
-</form>
+</div>
   )
 }

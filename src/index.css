@@ -265,6 +265,7 @@ body{
   padding: 2rem;
 }
 .questions{
+  min-height: 100vh;
   width: 100%;
  display: flex;
   flex-direction: column;
@@ -272,6 +273,23 @@ body{
 }
 .question{
   padding: 1rem;
+}
+.error{
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+.error img{
+  width: 300px
+}
+.error h1{
+display: flex;
+align-items: center;
+gap: 10px;
 }
 .user{
   display: flex;
