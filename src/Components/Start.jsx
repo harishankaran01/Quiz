@@ -15,7 +15,7 @@ export default function Start(props) {
   <p className="description">Challenge your brain's boundaries with a quiz marathon, where every answer unveils a new dimension of understanding.</p>
   <div>
     <input ref={inputref} placeholder="Enter your Name" type="text" onChange={(e)=>setName(e.target.value)}  id="email-address" required/>
-    <button  onClick={()=>name.trim()? props.OnChange(name):"null"} type="submit">Get Stared</button>
+    <button  onClick={()=>name.trim()? props.OnChange(name):alert("Please Enter Your Name")} type="submit">Get Stared</button>
   </div>
 </div>
   )

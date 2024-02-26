@@ -96,7 +96,7 @@ export default function App() {
             : <div className='error'>
               <img src={error}/>
                <h1>Loading page error</h1>
-               <h1>Sorry, For the inconvience. Try after few seconds</h1>
+               <h1>Sorry, for the inconvience. Try after few seconds...</h1>
             </div>}</div></div> : <Start OnChange={OnChange} />}
 
     </div>
